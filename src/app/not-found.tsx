@@ -25,9 +25,6 @@ const Error = () => {
               className="md:hidden"
             />
 
-
-
-
             <h1 className="px-4 pt-8 pb-4 text-center text-5xl font-bold leading-10 text-gray-800">
               OOPS! <span className="text-primary">Something went wrong</span>
             </h1>
