@@ -18,16 +18,13 @@ const Header = () => {
 
   const isLogin = false;
 
-
-
-
   return (
     <>
       <header className="header">
         <div className="container paddingTB flexSB">
           {/* ------  logo  --------- */}
           <div className="logo">
-            <Image src={Logo} alt="" width={100} height={100} />
+            <Image src={Logo} alt="" width={120} height={100} />
           </div>
           {/* ------  menu list  --------- */}
           <div className="nav utext">
@@ -48,14 +45,15 @@ const Header = () => {
           {/* login/Register */}
 
           <div>
-
-            {
-              !isLogin ? <button className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary ">
-              Login
-            </button> : <button className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary ">
-              Register
-            </button>
-            } 
+            {!isLogin ? (
+              <button className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary ">
+                Login
+              </button>
+            ) : (
+              <button className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary ">
+                Register
+              </button>
+            )}
           </div>
 
           {/* ------  toggle  --------- */}
