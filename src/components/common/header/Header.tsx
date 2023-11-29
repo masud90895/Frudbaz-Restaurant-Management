@@ -23,9 +23,9 @@ const Header = () => {
       <header className="header">
         <div className="container paddingTB flexSB">
           {/* ------  logo  --------- */}
-          <div className="logo">
+          <Link href={"/"} className="logo">
             <Image src={Logo} alt="" width={120} height={100} />
-          </div>
+          </Link>
           {/* ------  menu list  --------- */}
           <div className="nav utext">
             <ul className={show ? "mobile-nav" : "flexSB"}>
@@ -37,7 +37,13 @@ const Header = () => {
             </ul>
           </div>
           {/* ------  search box --------- */}
-          <div className="search flexSB">
+          <div
+            style={{
+              border: "1px solid gray",
+              padding: "10px 15px",
+            }}
+            className="search flexSB"
+          >
             <input type="text" placeholder="Search Products" />
             <i className="fa fa-search"></i>
           </div>
@@ -46,11 +52,21 @@ const Header = () => {
 
           <div>
             {!isLogin ? (
-              <button className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary ">
+              <button
+                style={{
+                  border: "1px solid #ff8e28",
+                }}
+                className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary "
+              >
                 Login
               </button>
             ) : (
-              <button className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary ">
+              <button
+                style={{
+                  border: "1px solid #ff8e28",
+                }}
+                className="bg-primary text-white  px-4 py-2 rounded-lg border-2   hover:bg-white hover:text-primary "
+              >
                 Register
               </button>
             )}

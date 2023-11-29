@@ -9,15 +9,15 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <>
-      <section className="hero">
+      <section className="hero w-full">
         <div className="container pt">
-          <div className="content flexSB">
+          <div className="content lg:flex items-center w-full">
             <div className="text">
               <h2>Medium 2-topping* Burger</h2>
               <h1>ARE YOU HUNGRY?</h1>
               <p>
-                Order now and get your food delivered to your door in 30 minutes,
-                or pick it up at your local restaurant.
+                Order now and get your food delivered to your door in 30
+                minutes, or pick it up at your local restaurant.
               </p>
               <div className="button">
                 <button className="btn1">learn more</button>
@@ -43,7 +43,7 @@ const Hero = () => {
               })}
             </div>
           </div>
-          <div className="socialIcon flexSB">
+          <div className="socialIcon hidden md:flex justify-between items-center ">
             <div className="social flex">
               {socialIcon.slice(0, 3).map((val, index) => {
                 return (

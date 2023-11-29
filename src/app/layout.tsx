@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body className={`${inter.className} max-w-[1920px] mx-auto `}>
+        <body className={`${inter.className} max-w-[1920px] mx-auto bg-white text-black`}>
           <Header />
           {children}
           <Footer />
