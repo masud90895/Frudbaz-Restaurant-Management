@@ -3,10 +3,11 @@ import Image from "next/image";
 import React from "react";
 import { Taka } from "@/helpers/SocialIcon";
 import NoProduct from "../../../public/images/noProduct.png";
+import Link from "next/link";
 
-const Products = ({ cover, sub, category, title, price }: ProductsType) => {
+const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
   return (
-    <div className="bg-gray-100 border-gray-200 rounded-lg ">
+    <div className="bg-gray-100 border-gray-200 rounded-lg hover:scale-105 transition-all    ">
       <div className="img">
         {cover ? (
           <Image
@@ -44,6 +45,21 @@ const Products = ({ cover, sub, category, title, price }: ProductsType) => {
           PRICE {Taka}
           {price}
         </label>
+      </div>
+
+      {/* button */}
+
+      <div className="p-4">
+        {/* add to cart */}
+        <button className="text-[12px] p-3 rounded-lg">ADD TO CART</button>
+
+        {/* Details */}
+        <Link
+          href={`/products/${id}`}
+          className="text-[12px] p-3 rounded-lg bg-white hover:bg-primary hover:text-white"
+        >
+          DETAILS
+        </Link>
       </div>
     </div>
   );

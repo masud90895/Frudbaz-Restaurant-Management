@@ -43,7 +43,7 @@ export const ProductsList: ProductsType[] = [
   },
   {
     id: 6,
-    cover: "",
+    cover: "/images/products/d6.png",
     title: "EGG BURGER",
     category: "DRINK",
     sub: "CHICKEN CHUP",
