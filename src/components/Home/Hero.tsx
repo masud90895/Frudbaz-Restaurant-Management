@@ -13,7 +13,7 @@ const Hero = () => {
         <div className="container pt">
           <div className="content lg:flex items-center w-full">
             <div className="text">
-              <h2>Medium 2-topping* Burger</h2>
+              <h2>Medium 2-topping | Burger</h2>
               <h1>ARE YOU HUNGRY?</h1>
               <p>
                 Order now and get your food delivered to your door in 30
