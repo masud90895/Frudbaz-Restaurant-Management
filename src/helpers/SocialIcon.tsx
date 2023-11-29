@@ -28,3 +28,5 @@ export const socialIcon = [
     link: "https://www.instagram.com/masud90895",
   },
 ];
+
+export const Taka = '\u09F3';
