@@ -7,9 +7,14 @@ import Link from "next/link";
 import { CloseOutlined, ProfileOutlined } from "@ant-design/icons";
 
 import Logo from "../../../../public/images/logo.png";
+import { ProductsList } from "@/helpers/ProductsList";
+import { ProductsType } from "@/types/ProductsType";
+import Empty from "../Empty/Empty";
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
 
   window.addEventListener("scroll", function () {
     const header = document.querySelector(".header");
@@ -17,6 +22,14 @@ const Header = () => {
   });
 
   const isLogin = false;
+
+  let ProductsLists: ProductsType[] = ProductsList;
+
+  if (search.length > 0) {
+    ProductsLists = ProductsList.filter((product) =>
+      product.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
   return (
     <>
@@ -37,15 +50,64 @@ const Header = () => {
             </ul>
           </div>
           {/* ------  search box --------- */}
-          <div
-            style={{
-              border: "1px solid gray",
-              padding: "10px 15px",
-            }}
-            className="search flexSB"
-          >
-            <input type="text" placeholder="Search Products" />
-            <i className="fa fa-search"></i>
+          <div className="relative inline-block text-left">
+            <div
+              style={{
+                border: "1px solid gray",
+                padding: "10px 15px",
+              }}
+              className="search flexSB"
+            >
+              <input
+                type="text"
+                placeholder="Search Products"
+                onChange={(e) => setSearch(e.target.value)}
+                onFocus={() => setIsSearch(true)}
+                onBlur={() => setIsSearch(false)}
+
+              />
+              <i className="fa fa-search"></i>
+            </div>
+
+            {/* drop */}
+
+            {isSearch && (
+              <div
+                className="absolute right-0 z-10 mt-2 w-[300px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabIndex={-1}
+              >
+                <div className="py-1" role="none">
+                  {ProductsLists?.length > 0 ? (
+                    ProductsLists.map((product, index) => (
+                      <Link
+                        href={`/products/${product.id}`}
+                        key={index}
+                        className="flex items-center gap-2 px-4 border-b hover:bg-orange-200 "
+                      >
+                        <Image
+                          src={product.cover}
+                          alt=""
+                          width={60}
+                          height={60}
+                        />
+
+                        <div className="px-4 py-2 text-sm text-gray-700 ">
+                          <p className="font-semibold">{product.title}</p>
+                          <p className="text-[10px]">
+                            {product.category} | {product.sub}
+                          </p>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <Empty description="No Product Found" />
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* login/Register */}
