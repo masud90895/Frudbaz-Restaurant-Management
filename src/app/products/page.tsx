@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useState } from "react";
-import { Dialog, Disclosure, RadioGroup, Transition } from "@headlessui/react";
+import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { CloseOutlined } from "@ant-design/icons";
 import { DownOutlined } from "@ant-design/icons";
 import { PlusOutlined } from "@ant-design/icons";
@@ -8,6 +8,7 @@ import { ProductsList } from "@/helpers/ProductsList";
 import Products from "@/components/Products/Products";
 import Empty from "@/components/common/Empty/Empty";
 import Pagination from "@/components/Pagination/Pagination";
+import { useForm } from "react-hook-form";
 
 const filters = [
   {
@@ -23,7 +24,7 @@ const filters = [
     ],
   },
   {
-    id: "Price",
+    id: "price",
     name: "Price Range",
     options: [
       { value: "0-99", label: "৳0-৳99" },
@@ -36,7 +37,7 @@ const filters = [
   },
 
   {
-    id: "Sort by",
+    id: "sort_by",
     name: "Sort by",
     options: [
       { value: "Relevance", label: "Relevance" },
@@ -52,11 +53,17 @@ function classNames(...classes: any) {
 
 export default function ProductsPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<any>();
-  console.log(
-    "🚀 ~ file: page.tsx:57 ~ ProductsPage ~ selectedCategory:",
-    selectedCategory
-  );
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => console.log(data);
+
+  console.log(watch());
 
   return (
     <div className="bg-white">
@@ -196,7 +203,10 @@ export default function ProductsPage() {
 
               <div className="hidden lg:block">
                 {/* Category */}
-                <div className="space-y-10 divide-y divide-gray-200">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-10 divide-y divide-gray-200"
+                >
                   {/* sort */}
                   {filters.map((section, sectionIdx) => (
                     <div
@@ -218,8 +228,9 @@ export default function ProductsPage() {
                               <input
                                 id={category.value}
                                 name={section.id}
-                                onChange={(e) => setSelectedCategory(e.target)}
+                                {...register(section.id)}
                                 type="radio"
+                                value={category.value}
                                 className="h-4 w-4  accent-primary focus:ring-none  "
                               />
                               <label
@@ -234,7 +245,7 @@ export default function ProductsPage() {
                       </fieldset>
                     </div>
                   ))}
-                </div>
+                </form>
               </div>
             </aside>
 

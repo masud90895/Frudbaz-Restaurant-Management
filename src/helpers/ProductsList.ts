@@ -8,6 +8,16 @@ export const ProductsList: ProductsType[] = [
     category: "DRINK",
     sub: "CHICKEN CHUP",
     price: "100.00",
+    description:
+      "Potato wedges are wedges of potatoes, often large and unpeeled, that are either baked or fried. They are sold at diners and fast food restaurants.",
+    images: [
+      "/images/products/d1.png",
+      "/images/products/d2.png",
+      "/images/products/d3.png",
+      "/images/products/d4.png",
+      "/images/products/d5.png",
+      "/images/products/d6.png",
+    ],
   },
   {
     id: 2,
@@ -16,6 +26,16 @@ export const ProductsList: ProductsType[] = [
     category: "PIZZA",
     sub: "ICE CREAM",
     price: "70.00",
+    description:
+      "A salmon burger is a type of fishcake made mostly from salmon in the style of a hamburger. The salmon requires a binder to make it stick together and is easy to overcook which makes it a difficult fish to use.",
+    images: [
+      "/images/products/d1.png",
+      "/images/products/d2.png",
+      "/images/products/d3.png",
+      "/images/products/d4.png",
+      "/images/products/d5.png",
+      "/images/products/d6.png",
+    ],
   },
   {
     id: 3,
@@ -24,6 +44,16 @@ export const ProductsList: ProductsType[] = [
     category: "DRINK",
     sub: "CHICKEN CHUP",
     price: "20.00",
+    description:
+      "A salmon burger is a type of fishcake made mostly from salmon in the style of a hamburger. The salmon requires a binder to make it stick together and is easy to overcook which makes it a difficult fish to use.",
+    images: [
+      "/images/products/d1.png",
+      "/images/products/d2.png",
+      "/images/products/d3.png",
+      "/images/products/d4.png",
+      "/images/products/d5.png",
+      "/images/products/d6.png",
+    ],
   },
   {
     id: 4,
@@ -32,6 +62,16 @@ export const ProductsList: ProductsType[] = [
     category: "PIZZA",
     sub: "DRINK",
     price: "20.00",
+    description:
+      "A salmon burger is a type of fishcake made mostly from salmon in the style of a hamburger. The salmon requires a binder to make it stick together and is easy to overcook which makes it a difficult fish to use.",
+    images: [
+      "/images/products/d1.png",
+      "/images/products/d2.png",
+      "/images/products/d3.png",
+      "/images/products/d4.png",
+      "/images/products/d5.png",
+      "/images/products/d6.png",
+    ],
   },
   {
     id: 5,
@@ -40,6 +80,16 @@ export const ProductsList: ProductsType[] = [
     category: "BURGER",
     sub: "BLUEBERRY SHAKE",
     price: "65.00",
+    description:
+      "Cauliflower mash is a great low carb alternative to mashed potatoes. It has a similar texture to mashed potatoes, but with fewer carbs.",
+    images: [
+      "/images/products/d1.png",
+      "/images/products/d2.png",
+      "/images/products/d3.png",
+      "/images/products/d4.png",
+      "/images/products/d5.png",
+      "/images/products/d6.png",
+    ],
   },
   {
     id: 6,
@@ -48,5 +98,15 @@ export const ProductsList: ProductsType[] = [
     category: "DRINK",
     sub: "CHICKEN CHUP",
     price: "80.00",
+    description:
+      "A salmon burger is a type of fishcake made mostly from salmon in the style of a hamburger. The salmon requires a binder to make it stick together and is easy to overcook which makes it a difficult fish to use.",
+    images: [
+      "/images/products/d1.png",
+      "/images/products/d2.png",
+      "/images/products/d3.png",
+      "/images/products/d4.png",
+      "/images/products/d5.png",
+      "/images/products/d6.png",
+    ],
   },
 ];
