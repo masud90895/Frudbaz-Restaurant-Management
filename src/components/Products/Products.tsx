@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
   return (
-    <div className="bg-gray-100 border-gray-200 rounded-lg hover:scale-105 transition-all    ">
+    <div className="dishes bg-gray-100 border-gray-200 rounded-lg hover:scale-105 transition-all    ">
       <div className="img">
         {cover ? (
           <Image
@@ -36,7 +36,7 @@ const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
 
       <div className="px-4 pb-3">
         <div className="title flex">
-          <h4>
+          <h4 className="text-[12xl]">
             {sub} ,{category}
           </h4>
         </div>
@@ -51,7 +51,7 @@ const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
 
       <div className="p-4">
         {/* add to cart */}
-        <button className="text-[12px] p-3 rounded-lg">ADD TO CART</button>
+        <button className="text-[12px] p-3 rounded-lg ">ADD TO CART</button>
 
         {/* Details */}
         <Link

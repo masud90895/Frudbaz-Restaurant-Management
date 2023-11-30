@@ -15,6 +15,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
   const [isSearch, setIsSearch] = useState(false);
+  console.log("🚀 ~ file: Header.tsx:18 ~ Header ~ isSearch:", isSearch);
 
   window.addEventListener("scroll", function () {
     const header = document.querySelector(".header");
@@ -30,6 +31,13 @@ const Header = () => {
       product.title.toLowerCase().includes(search.toLowerCase())
     );
   }
+
+  const handleHide = () => {
+    // set timeout to hide the search box
+    setTimeout(() => {
+      setIsSearch(false);
+    }, 300);
+  };
 
   return (
     <>
@@ -50,7 +58,11 @@ const Header = () => {
             </ul>
           </div>
           {/* ------  search box --------- */}
-          <div className="relative inline-block text-left">
+          <div
+            onFocus={() => setIsSearch(true)}
+            onBlur={() => handleHide()}
+            className="relative inline-block text-left"
+          >
             <div
               style={{
                 border: "1px solid gray",
@@ -62,9 +74,6 @@ const Header = () => {
                 type="text"
                 placeholder="Search Products"
                 onChange={(e) => setSearch(e.target.value)}
-                onFocus={() => setIsSearch(true)}
-                onBlur={() => setIsSearch(false)}
-
               />
               <i className="fa fa-search"></i>
             </div>
