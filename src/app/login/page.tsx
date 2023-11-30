@@ -1,10 +1,12 @@
 "use client";
 
 import InputField from "@/components/common/InputField/InputField";
+import { AuthContext } from "@/firebase/AuthProvider";
 
 import { Button, message } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 const LoginPage = () => {
   const router = useRouter();
@@ -16,6 +18,20 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = async (data: any) => {};
+
+  // google login
+
+  const { googleLogin, user, loading }: any = useContext(AuthContext);
+
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin();
+      await message.success("Login success");
+      await router.push("/");
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
 
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
@@ -111,6 +127,7 @@ const LoginPage = () => {
             </div>
             <div className="flex justify-center space-x-4">
               <button
+                onClick={handleGoogleLogin}
                 aria-label="Log in with Google"
                 className="p-3 rounded-sm border "
               >
