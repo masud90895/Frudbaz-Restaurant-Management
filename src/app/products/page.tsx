@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Transition } from "@headlessui/react";
+import { Dialog, Disclosure, RadioGroup, Transition } from "@headlessui/react";
 import { CloseOutlined } from "@ant-design/icons";
 import { DownOutlined } from "@ant-design/icons";
 import { PlusOutlined } from "@ant-design/icons";
@@ -11,38 +11,37 @@ import Pagination from "@/components/Pagination/Pagination";
 
 const filters = [
   {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White" },
-      { value: "beige", label: "Beige" },
-      { value: "blue", label: "Blue" },
-      { value: "brown", label: "Brown" },
-      { value: "green", label: "Green" },
-      { value: "purple", label: "Purple" },
-    ],
-  },
-  {
     id: "category",
     name: "Category",
     options: [
-      { value: "new-arrivals", label: "All New Arrivals" },
-      { value: "tees", label: "Tees" },
-      { value: "crewnecks", label: "Crewnecks" },
-      { value: "sweatshirts", label: "Sweatshirts" },
-      { value: "pants-shorts", label: "Pants & Shorts" },
+      { value: "BURGER", label: "BURGER" },
+      { value: "PIZZA", label: "PIZZA" },
+      { value: "BLUEBERRY_SHAKE", label: "BLUEBERRY SHAKE" },
+      { value: "CHICKEN_CHUP", label: "CHICKEN CHUP" },
+      { value: "ICE_CREAM", label: "ICE CREAM" },
+      { value: "DRINK", label: "DRINK" },
     ],
   },
   {
-    id: "sizes",
-    name: "Sizes",
+    id: "Price",
+    name: "Price Range",
     options: [
-      { value: "xs", label: "XS" },
-      { value: "s", label: "S" },
-      { value: "m", label: "M" },
-      { value: "l", label: "L" },
-      { value: "xl", label: "XL" },
-      { value: "2xl", label: "2XL" },
+      { value: "0-99", label: "৳0-৳99" },
+      { value: "100-199", label: "৳100-৳199" },
+      { value: "200-299", label: "৳200-৳299" },
+      { value: "300-399", label: "৳300-৳399" },
+      { value: "400-499", label: "৳400-৳499" },
+      { value: "500+", label: "৳500+" },
+    ],
+  },
+
+  {
+    id: "Sort by",
+    name: "Sort by",
+    options: [
+      { value: "Relevance", label: "Relevance" },
+      { value: "Fastest delivery", label: "Fastest delivery" },
+      { value: "Distance", label: "Distance" },
     ],
   },
 ];
@@ -53,6 +52,11 @@ function classNames(...classes: any) {
 
 export default function ProductsPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<any>();
+  console.log(
+    "🚀 ~ file: page.tsx:57 ~ ProductsPage ~ selectedCategory:",
+    selectedCategory
+  );
 
   return (
     <div className="bg-white">
@@ -101,7 +105,7 @@ export default function ProductsPage() {
                     </button>
                   </div>
 
-                  {/* Filters */}
+                  {/* Filters mobail*/}
                   <form className="mt-4">
                     {filters.map((section) => (
                       <Disclosure
@@ -191,34 +195,38 @@ export default function ProductsPage() {
               </button>
 
               <div className="hidden lg:block">
-                <form className="space-y-10 divide-y divide-gray-200">
+                {/* Category */}
+                <div className="space-y-10 divide-y divide-gray-200">
+                  {/* sort */}
                   {filters.map((section, sectionIdx) => (
                     <div
-                      key={section.name}
+                      key={sectionIdx}
                       className={sectionIdx === 0 ? "" : "pt-10"}
                     >
-                      <fieldset>
-                        <legend className="block text-sm font-medium text-gray-900">
-                          {section.name}
-                        </legend>
-                        <div className="space-y-3 pt-6">
-                          {section.options.map((option, optionIdx) => (
+                      <label className="text-base  font-semibold text-gray-900">
+                        {section.name}
+                      </label>
+
+                      <fieldset className="mt-4">
+                        <legend className="sr-only"> {section.name}</legend>
+                        <div className="space-y-4">
+                          {section.options.map((category) => (
                             <div
-                              key={option.value}
+                              key={category.value}
                               className="flex items-center"
                             >
                               <input
-                                id={`${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                defaultValue={option.value}
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                id={category.value}
+                                name={section.id}
+                                onChange={(e) => setSelectedCategory(e.target)}
+                                type="radio"
+                                className="h-4 w-4  accent-primary focus:ring-none  "
                               />
                               <label
-                                htmlFor={`${section.id}-${optionIdx}`}
-                                className="ml-3 text-sm text-gray-600"
+                                htmlFor={category.label}
+                                className="ml-3 block text-sm font-medium leading-6 text-gray-900"
                               >
-                                {option.label}
+                                {category.label}
                               </label>
                             </div>
                           ))}
@@ -226,7 +234,7 @@ export default function ProductsPage() {
                       </fieldset>
                     </div>
                   ))}
-                </form>
+                </div>
               </div>
             </aside>
 
