@@ -4,8 +4,18 @@ import React from "react";
 import { Taka } from "@/helpers/SocialIcon";
 import NoProduct from "../../../public/images/noProduct.png";
 import Link from "next/link";
+import { useAppDispatch } from "@/redux/hook";
+import { addToCart } from "@/redux/features/addToCartSlice";
+import { message } from "antd";
 
 const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (addedService: ProductsType) => {
+    dispatch(addToCart(addedService));
+    message.success("Product added to cart");
+  };
+
   return (
     <div className="dishes bg-gray-100 border-gray-200 rounded-lg hover:scale-105 transition-all    ">
       <div className="img">
@@ -51,7 +61,21 @@ const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
 
       <div className="p-4">
         {/* add to cart */}
-        <button className="text-[12px] p-3 rounded-lg ">ADD TO CART</button>
+        <button
+          onClick={() =>
+            handleAddToCart({
+              cover,
+              sub,
+              category,
+              title,
+              price,
+              id,
+            })
+          }
+          className="text-[12px] p-3 rounded-lg "
+        >
+          ADD TO CART
+        </button>
 
         {/* Details */}
         <Link
