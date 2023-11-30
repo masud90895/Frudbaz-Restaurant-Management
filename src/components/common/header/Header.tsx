@@ -4,7 +4,11 @@ import React, { Fragment, useContext, useState } from "react";
 import Image from "next/image";
 import { navList } from "@/helpers/Navlist";
 import Link from "next/link";
-import { CloseOutlined, ProfileOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  ProfileOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 
 import Logo from "../../../../public/images/logo.png";
 import { ProductsList } from "@/helpers/ProductsList";
@@ -135,81 +139,96 @@ const Header = () => {
             )}
           </div>
 
-          {/* login/Register */}
-          {/* user */}
+          <div className="flex items-center gap-3">
+            {/* Cart */}
 
-          {user ? (
-            <Menu as="div" className="relative inline-block text-left">
-              <div>
-                <Menu.Button className="">
-                  <Image
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
-                    src={
-                      user?.photoURL ??
-                      "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-                    }
-                    alt=""
-                    width={100}
-                    height={100}
-                  />
-                </Menu.Button>
-              </div>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-                  <div className="px-1 py-1 ">
-                    <Menu.Item>
-                      <Link
-                        href="/dashboard"
-                        className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
-                        role="menuitem"
-                      >
-                        Dashboard
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <button
-                        onClick={() => setIsCardOpen(true)}
-                        className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
-                        role="menuitem"
-                      >
-                        My Cart
-                      </button>
-                    </Menu.Item>
-                  </div>
-                  <div className="py-1">
-                    <button
-                      onClick={handleLogOut}
-                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-red-500 hover:text-white rounded"
-                      role="menuitem"
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
-          ) : (
-            <Link href={"/login"}>
-              <div className="relative inline-flex  group">
-                <div className="absolute transitiona-all duration-1000  rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
-                <p
-                  title="Login"
-                  className="relative inline-flex items-center justify-center px-4 py-2 text-lg  text-primary bg-white border border-primary  transition-all duration-200  font-pj rounded-xl hover:bg-primary hover:text-white hover:border-transparent "
-                  role="button"
+            <button
+              onClick={() => setIsCardOpen(true)}
+              style={{
+                border: "1px solid gray",
+                padding: "6px 10px",
+              }}
+              className="bg-white shadow-xl rounded-full hover:bg-primary hover:text-white hover:border-primary "
+            >
+              <ShoppingCartOutlined className="text-2xl" />
+            </button>
+
+            {/* login/Register */}
+            {/* user */}
+
+            {user ? (
+              <Menu as="div" className="relative inline-block text-left">
+                <div>
+                  <Menu.Button className="">
+                    <Image
+                      className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                      src={
+                        user?.photoURL ??
+                        "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                      }
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
                 >
-                  Login
-                </p>
-              </div>
-            </Link>
-          )}
+                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                    <div className="px-1 py-1 ">
+                      <Menu.Item>
+                        <Link
+                          href="/dashboard"
+                          className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
+                          role="menuitem"
+                        >
+                          Dashboard
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item>
+                        <button
+                          onClick={() => setIsCardOpen(true)}
+                          className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
+                          role="menuitem"
+                        >
+                          My Cart
+                        </button>
+                      </Menu.Item>
+                    </div>
+                    <div className="py-1">
+                      <button
+                        onClick={handleLogOut}
+                        className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-red-500 hover:text-white rounded"
+                        role="menuitem"
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            ) : (
+              <Link href={"/login"}>
+                <div className="relative inline-flex  group">
+                  <div className="absolute transitiona-all duration-1000  rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
+                  <p
+                    title="Login"
+                    className="relative inline-flex items-center justify-center px-4 py-2 text-lg  text-primary bg-white border border-primary  transition-all duration-200  font-pj rounded-xl hover:bg-primary hover:text-white hover:border-transparent "
+                    role="button"
+                  >
+                    Login
+                  </p>
+                </div>
+              </Link>
+            )}
+          </div>
 
           {/* ------  toggle  --------- */}
           <div
@@ -230,7 +249,7 @@ const Header = () => {
 
       {/* card */}
 
-      {user && <AddToCard setOpen={setIsCardOpen} open={isCardOpen} />}
+      <AddToCard setOpen={setIsCardOpen} open={isCardOpen} />
     </>
   );
 };

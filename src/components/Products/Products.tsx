@@ -1,17 +1,23 @@
 import { ProductsType } from "@/types/ProductsType";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import { Taka } from "@/helpers/SocialIcon";
 import NoProduct from "../../../public/images/noProduct.png";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import { addToCart } from "@/redux/features/addToCartSlice";
 import { message } from "antd";
+import { AuthContext } from "@/firebase/AuthProvider";
 
 const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
   const dispatch = useAppDispatch();
+  const { user }: any = useContext(AuthContext);
 
   const handleAddToCart = (addedService: ProductsType) => {
+    if (!user) {
+      return message.error("You are not Authorize user.please login");
+    }
+
     dispatch(addToCart(addedService));
     message.success("Product added to cart");
   };

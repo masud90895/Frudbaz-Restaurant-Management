@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   // google login
 
-  const { googleLogin, login, loading, user }: any = useContext(AuthContext);
+  const { googleLogin, login }: any = useContext(AuthContext);
 
   const handleGoogleLogin = async () => {
     try {
@@ -116,7 +116,7 @@ const LoginPage = () => {
                     <Button
                       id="loginButton"
                       htmlType="submit"
-                      loading={loading}
+                    
                       className="block w-full  mx-auto  text-white rounded-lg  font-semibold"
                     >
                       Login

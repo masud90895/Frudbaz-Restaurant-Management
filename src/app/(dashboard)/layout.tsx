@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Layout, message } from "antd";
 import DashboardSiteBar from "@/components/dashboard/DashboardSiteBar";
+import DashboardContents from "@/components/dashboard/DashboardContent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,18 +22,34 @@ export default function RootLayout({
 
   // user
   const { loading, user, signOutUser }: any = useContext(AuthContext);
+  
 
   if (!user && typeof window !== "undefined") {
     router.push("/login");
     return message.error("You are not Authorize user.please login");
   }
 
+  // handle logout
+  const handleLogOut = async () => {
+    try {
+      await signOutUser();
+      await message.success("Logout Successfully");
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
+
   return (
     <Layout hasSider>
-      <DashboardSiteBar
+      <DashboardSiteBar collapsed={collapsed} />
+      <DashboardContents
         collapsed={collapsed}
-      />
-      
+        setCollapsed={setCollapsed}
+        user={user}
+        handleLogOut={handleLogOut}
+      >
+        <AuthProvider>{children}</AuthProvider>
+      </DashboardContents>
     </Layout>
   );
 }

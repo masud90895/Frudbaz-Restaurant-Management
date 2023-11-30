@@ -14,15 +14,13 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const router = useRouter();
 
   // google login
 
-  const { googleLogin, createUserEmailPass, loading }: any =
-    useContext(AuthContext);
+  const { googleLogin, createUserEmailPass }: any = useContext(AuthContext);
 
   const handleGoogleLogin = async () => {
     try {
@@ -310,7 +308,6 @@ const RegisterPage = () => {
                 <div className="flex -mx-3 my-[16px]">
                   <div className="w-full px-3 mb-5">
                     <Button
-                      loading={loading}
                       id="loginButton"
                       htmlType="submit"
                       className={

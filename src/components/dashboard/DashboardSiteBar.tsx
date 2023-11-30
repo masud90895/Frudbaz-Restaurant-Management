@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 
-import logoWithName from "../../../../public/assists/logo_Asset-1-1.png";
-import logo from "../../../../public/assists/logo.png";
+import logo from "../../../public/images/logo.png";
 
 import { Layout, Menu } from "antd";
 import Image from "next/image";
@@ -42,7 +41,7 @@ const DashboardSiteBar = ({ collapsed }: ISiteBar) => {
           </Link>
         ) : (
           <Link href={"/"}>
-            <Image alt="Logo" src={logoWithName} width={100} height={100} />
+            <Image alt="Logo" src={logo} width={100} height={100} />
           </Link>
         )}
       </div>

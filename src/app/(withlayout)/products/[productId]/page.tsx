@@ -18,6 +18,8 @@ import { useAppDispatch } from "@/redux/hook";
 import { ProductsType } from "@/types/ProductsType";
 import { addToCart } from "@/redux/features/addToCartSlice";
 import { message } from "antd";
+import { AuthContext } from "@/firebase/AuthProvider";
+import { useContext } from "react";
 
 const product = {
   name: "POTATO WEDGES",
@@ -75,8 +77,12 @@ export default function SingleProduct({
 
   // add to cart
   const dispatch = useAppDispatch();
+  const { user }: any = useContext(AuthContext);
 
   const handleAddToCart = (addedService: ProductsType) => {
+    if (!user) {
+      return message.error("You are not Authorize user.please login");
+    }
     dispatch(addToCart(addedService));
     message.success("Product added to cart");
   };
