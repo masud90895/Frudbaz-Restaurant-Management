@@ -87,7 +87,9 @@ const InputField = ({
           required={required ? true : false}
         />
       )}
-      {errors?.name && <p className="text-rose-500">{label} is required</p>}
+      {errors?.name && (
+        <p className="text-rose-500 text-[12px]">{label} is required</p>
+      )}
     </div>
   );
 };

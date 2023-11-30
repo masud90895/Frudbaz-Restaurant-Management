@@ -576,8 +576,28 @@ footer img {
 .dishes label {
   color: crimson;
 }
+
+#loginButton{
+  background-color: #ff8e28;
+  color: #fff;
+  border : 1px solid #ff8e28!;
+}
+#loginButton:hover{
+  background-color: #fff;
+  color: #ff8e28;
+  border : 1px solid #ff8e28 !important;
+
+
+}
+
+
+
+
 @media screen and (max-width: 800px) {
   .dishes button {
     margin-bottom: 20px;
   }
 }
+
+
+

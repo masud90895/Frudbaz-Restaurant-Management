@@ -1,20 +1,31 @@
 "use client";
 
 import InputField from "@/components/common/InputField/InputField";
-import { Button, message } from "antd";
+import { Button, Checkbox, message } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-const LoginPage = () => {
-  const router = useRouter();
+
+const RegisterPage = () => {
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = async (data: any) => {};
+  // const [registration, { isLoading }] = useRegistrationMutation();
+  const router = useRouter();
+
+  const onSubmit = async (data: any) => {
+    
+  };
+
+
+
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
       <div
@@ -24,82 +35,6 @@ const LoginPage = () => {
         }}
       >
         <div className="md:flex w-full">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="w-full md:w-1/2 py-10 px-5 md:px-10"
-          >
-            <div className="text-center mb-10">
-              <h1 className="font-bold text-3xl text-gray-900">Login</h1>
-              <p>Enter your information to Login</p>
-            </div>
-
-            <div>
-              <InputField
-                label="Email"
-                name="email"
-                placeholder="Enter your email"
-                register={register}
-                errors={errors}
-                required={true}
-                type="email"
-              />
-
-              {errors?.email && errors?.email?.message === "" && (
-                <p className="text-rose-500 my-[2px] text-[12px]">
-                  Email is Required
-                </p>
-              )}
-              {errors?.email && errors?.email?.message && (
-                <p className="text-rose-500 my-[2px] text-[12px]">
-                  {errors?.email?.message as string}
-                </p>
-              )}
-
-              <InputField
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                register={register}
-                errors={errors}
-                required={true}
-                type="password"
-              />
-
-              {errors?.password && errors?.password?.message === "" && (
-                <p className="text-rose-500 my-[2px] text-[12px]">
-                  Password is Required
-                </p>
-              )}
-              {errors?.password && errors?.password?.message && (
-                <p className="text-rose-500 my-[2px] text-[12px]">
-                  {errors?.password?.message as string}
-                </p>
-              )}
-
-              {/* already have account */}
-              <div className="flex items-center justify-end mt-2">
-                <Link
-                  href="/register"
-                  className="inline-flex items-center font-bold text-primary hover:text-primary/70 text-xs text-center"
-                >
-                  <span className="ml-2">Don&apos;t have account?</span>
-                </Link>
-              </div>
-
-              <div className="flex -mx-3 my-[16px]">
-                <div className="w-full px-3 mb-5">
-                  <Button
-                    id="loginButton"
-                    htmlType="submit"
-                    // loading={isLoading}
-                    className="block w-full  mx-auto  text-white rounded-lg  font-semibold"
-                  >
-                    Login
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </form>
           <div className="hidden md:block w-1/2 bg-primary py-10 px-10">
             <svg
               id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
@@ -305,10 +240,96 @@ const LoginPage = () => {
               />
             </svg>
           </div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full md:w-1/2 py-10 px-5 md:px-10"
+          >
+            <div className="text-center mb-10">
+              <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
+              <p>Enter your information to register</p>
+            </div>
+
+            <div>
+              <InputField
+                label="Name"
+                name="name"
+                placeholder="Enter your first name"
+                register={register}
+                errors={errors}
+                required={true}
+                type="text"
+              />
+             
+
+              <InputField
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+                register={register}
+                errors={errors}
+                required={true}
+                type="email"
+              />
+
+             
+             
+              <InputField
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                register={register}
+                errors={errors}
+                required={true}
+                type="password"
+              />
+             
+              
+
+              {/* terms and condition */}
+              <div className="flex items-center font-semibold text-xs mt-1">
+                <Checkbox
+                  className="accent-primary"
+                  
+                >
+                  I agree with
+                </Checkbox>
+                <Link
+                  href={"/terms-and-condition"}
+                  className="text-primary underline"
+                >
+                  terms and conditions
+                </Link>
+              </div>
+              {/* already have account */}
+              <div className="flex items-center justify-end mt-2 ">
+                <Link
+                  href="/login"
+                  className="inline-flex items-center font-bold text-primary hover:text-primary/70 text-xs text-center"
+                >
+                  <span className="ml-2">Already have an account?</span>
+                </Link>
+              </div>
+
+              <div className="flex -mx-3 my-[16px]">
+                <div className="w-full px-3 mb-5">
+                  <Button
+                    id="loginButton"
+                    htmlType="submit"
+
+                    className={
+                      "block w-full  mx-auto  text-white rounded-lg  font-semibold"
+                    }
+                  >
+                    REGISTER NOW
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
