@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
-
   const {
     register,
     handleSubmit,
@@ -20,11 +19,7 @@ const RegisterPage = () => {
   // const [registration, { isLoading }] = useRegistrationMutation();
   const router = useRouter();
 
-  const onSubmit = async (data: any) => {
-    
-  };
-
-
+  const onSubmit = async (data: any) => {};
 
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
@@ -35,7 +30,7 @@ const RegisterPage = () => {
         }}
       >
         <div className="md:flex w-full">
-          <div className="hidden md:block w-1/2 bg-primary py-10 px-10">
+          <div className="hidden md:block w-1/2 bg-primary py-10 px-10 ">
             <svg
               id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
               data-name="Layer 1"
@@ -240,93 +235,107 @@ const RegisterPage = () => {
               />
             </svg>
           </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="w-full md:w-1/2 py-10 px-5 md:px-10"
-          >
-            <div className="text-center mb-10">
-              <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
-              <p>Enter your information to register</p>
-            </div>
-
-            <div>
-              <InputField
-                label="Name"
-                name="name"
-                placeholder="Enter your first name"
-                register={register}
-                errors={errors}
-                required={true}
-                type="text"
-              />
-             
-
-              <InputField
-                label="Email"
-                name="email"
-                placeholder="Enter your email"
-                register={register}
-                errors={errors}
-                required={true}
-                type="email"
-              />
-
-             
-             
-              <InputField
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                register={register}
-                errors={errors}
-                required={true}
-                type="password"
-              />
-             
-              
-
-              {/* terms and condition */}
-              <div className="flex items-center font-semibold text-xs mt-1">
-                <Checkbox
-                  className="accent-primary"
-                  
-                >
-                  I agree with
-                </Checkbox>
-                <Link
-                  href={"/terms-and-condition"}
-                  className="text-primary underline"
-                >
-                  terms and conditions
-                </Link>
-              </div>
-              {/* already have account */}
-              <div className="flex items-center justify-end mt-2 ">
-                <Link
-                  href="/login"
-                  className="inline-flex items-center font-bold text-primary hover:text-primary/70 text-xs text-center"
-                >
-                  <span className="ml-2">Already have an account?</span>
-                </Link>
+          <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="text-center mb-10">
+                <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
+                <p>Enter your information to register</p>
               </div>
 
-              <div className="flex -mx-3 my-[16px]">
-                <div className="w-full px-3 mb-5">
-                  <Button
-                    id="loginButton"
-                    htmlType="submit"
+              <div>
+                <InputField
+                  label="Name"
+                  name="name"
+                  placeholder="Enter your first name"
+                  register={register}
+                  errors={errors}
+                  required={true}
+                  type="text"
+                />
 
-                    className={
-                      "block w-full  mx-auto  text-white rounded-lg  font-semibold"
-                    }
+                <InputField
+                  label="Email"
+                  name="email"
+                  placeholder="Enter your email"
+                  register={register}
+                  errors={errors}
+                  required={true}
+                  type="email"
+                />
+
+                <InputField
+                  label="Password"
+                  name="password"
+                  placeholder="Enter your password"
+                  register={register}
+                  errors={errors}
+                  required={true}
+                  type="password"
+                />
+
+                {/* terms and condition */}
+                <div className="flex items-center font-semibold text-xs mt-1">
+                  <Checkbox className="accent-primary">I agree with</Checkbox>
+                  <Link
+                    href={"/terms-and-condition"}
+                    className="text-primary underline"
                   >
-                    REGISTER NOW
-                  </Button>
+                    terms and conditions
+                  </Link>
+                </div>
+                {/* already have account */}
+                <div className="flex items-center justify-end mt-2 ">
+                  <Link
+                    href="/login"
+                    className="inline-flex items-center font-bold text-primary hover:text-primary/70 text-xs text-center"
+                  >
+                    <span className="ml-2">Already have an account?</span>
+                  </Link>
+                </div>
+
+                <div className="flex -mx-3 my-[16px]">
+                  <div className="w-full px-3 mb-5">
+                    <Button
+                      id="loginButton"
+                      htmlType="submit"
+                      className={
+                        "block w-full  mx-auto  text-white rounded-lg  font-semibold"
+                      }
+                    >
+                      REGISTER NOW
+                    </Button>
+                  </div>
                 </div>
               </div>
+            </form>
+
+            {/* social */}
+
+            <div className="flex items-center pt-4 space-x-1">
+              <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+              <p className="px-3 text-sm dark:text-gray-400">
+                Register with social accounts
+              </p>
+              <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             </div>
-          </form>
+            <div className="flex justify-center space-x-4">
+              <button
+                aria-label="Log in with Google"
+                className="p-3 rounded-sm border "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  className="w-5 h-5 fill-current"
+                >
+                  <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
+                </svg>
+              </button>
+             
+            </div>
+          </div>
         </div>
+        {/* social media */}
       </div>
     </div>
   );
