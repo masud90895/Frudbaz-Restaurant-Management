@@ -116,31 +116,20 @@ const Contact = () => {
           className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
         >
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <InputField
-                errors={errors}
-                register={register}
-                label="First name"
-                name="firstName"
-                placeholder="First name"
-                required
-                type="text"
-              />
+         
+             
 
               <InputField
                 errors={errors}
                 register={register}
-                label="Last name"
-                name="lastName"
-                placeholder="Last name"
+                label="Name"
+                name="name"
+                placeholder="Name"
                 required
                 type="text"
               />
 
-              {errors?.firstName && (
-                <p className="text-rose-500 text-[12px]">Name is required</p>
-              )}
-            </div>
+             
 
             {/* email */}
             <InputField
@@ -152,9 +141,25 @@ const Contact = () => {
               required
               type="email"
             />
-            {errors?.email && (
-              <p className="text-rose-500 text-[12px]">Email is required</p>
-            )}
+            
+
+
+            {/* subject */}
+
+            <InputField
+              errors={errors}
+              register={register}
+              label="Subject"
+              name="subject"
+              placeholder="Subject"
+              required
+              type="text"
+            />
+
+            
+
+
+
 
             <div className="sm:col-span-2">
               <label
