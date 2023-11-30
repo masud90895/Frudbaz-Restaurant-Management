@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/lib/Providers";
 import Header from "@/components/common/header/Header";
 import Footer from "@/components/common/footer/Footer";
+import AuthProvider from "@/firebase/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,14 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body className={`${inter.className} max-w-[1920px] mx-auto bg-white text-black`}>
-          <Header />
-          {children}
-          <Footer />
+        <body
+          className={`${inter.className} max-w-[1920px] mx-auto bg-white text-black`}
+        >
+          <AuthProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AuthProvider>
         </body>
       </html>
     </Providers>
