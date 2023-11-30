@@ -28,7 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
-  const singOutUser = () => {
+  const signOutUser = () => {
     setLoading(true);
     return signOut(auth);
   };
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     user,
     createUserEmailPass,
     login,
-    singOutUser,
+    signOutUser,
     googleLogin,
     loading,
     updateName,

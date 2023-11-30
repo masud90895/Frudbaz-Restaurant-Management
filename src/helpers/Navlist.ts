@@ -13,4 +13,8 @@ export const navList: NavLinkType[] = [
     text: "Contact Us",
     path: "/contact",
   },
+  {
+    text: "Dashboard",
+    path: "/dashboard",
+  }
 ];

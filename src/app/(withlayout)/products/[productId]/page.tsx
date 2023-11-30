@@ -1,7 +1,7 @@
 "use client";
 
 import { Disclosure, Tab } from "@headlessui/react";
-import NoProduct from "../../../../public/images/noProduct.png";
+import NoProduct from "../../../../../public/images/noproduct.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

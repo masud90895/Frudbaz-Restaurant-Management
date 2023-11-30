@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 
 import Image from "next/image";
 import { navList } from "@/helpers/Navlist";
@@ -10,16 +10,13 @@ import Logo from "../../../../public/images/logo.png";
 import { ProductsList } from "@/helpers/ProductsList";
 import { ProductsType } from "@/types/ProductsType";
 import Empty from "../Empty/Empty";
-import { useRouter } from "next/navigation";
 import AddToCard from "@/components/AddToCard/AddToCard";
 import { Menu, Transition } from "@headlessui/react";
+import { AuthContext } from "@/firebase/AuthProvider";
+import { message } from "antd";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
   const [isCardOpen, setIsCardOpen] = useState(false);
-  const router = useRouter();
-
-  const userLogin = true;
 
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
@@ -43,6 +40,19 @@ const Header = () => {
     setTimeout(() => {
       setIsSearch(false);
     }, 300);
+  };
+
+  // user
+  const { loading, user, signOutUser }: any = useContext(AuthContext);
+
+  // handle logout
+  const handleLogOut = async () => {
+    try {
+      await signOutUser();
+      await message.success("Logout Successfully");
+    } catch (error: any) {
+      message.error(error.message);
+    }
   };
 
   return (
@@ -128,13 +138,14 @@ const Header = () => {
           {/* login/Register */}
           {/* user */}
 
-          {userLogin ? (
+          {user ? (
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="">
                   <Image
                     className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
                     src={
+                      user?.photoURL ??
                       "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
                     }
                     alt=""
@@ -175,7 +186,7 @@ const Header = () => {
                   </div>
                   <div className="py-1">
                     <button
-                      // onClick={handleLogOut}
+                      onClick={handleLogOut}
                       className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-red-500 hover:text-white rounded"
                       role="menuitem"
                     >
@@ -219,7 +230,7 @@ const Header = () => {
 
       {/* card */}
 
-      {userLogin && <AddToCard setOpen={setIsCardOpen} open={isCardOpen} />}
+      {user && <AddToCard setOpen={setIsCardOpen} open={isCardOpen} />}
     </>
   );
 };

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Providers from "@/lib/Providers";
+import Header from "@/components/common/header/Header";
+import Footer from "@/components/common/footer/Footer";
 import AuthProvider from "@/firebase/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +24,11 @@ export default function RootLayout({
         <body
           className={`${inter.className} max-w-[1920px] mx-auto bg-white text-black`}
         >
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AuthProvider>
         </body>
       </html>
     </Providers>
