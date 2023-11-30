@@ -17,15 +17,24 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: any) => {};
-
   // google login
 
-  const { googleLogin }: any = useContext(AuthContext);
+  const { googleLogin, login, loading, user }: any = useContext(AuthContext);
 
   const handleGoogleLogin = async () => {
     try {
       await googleLogin();
+      await message.success("Login success");
+      await router.push("/");
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
+
+  // login with email and password
+  const handleLoginWithEmailPassword = async (data: any) => {
+    try {
+      await login(data.email, data.password);
       await message.success("Login success");
       await router.push("/");
     } catch (error: any) {
@@ -43,7 +52,7 @@ const LoginPage = () => {
       >
         <div className="md:flex w-full">
           <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleLoginWithEmailPassword)}>
               <div className="text-center mb-10">
                 <h1 className="font-bold text-3xl text-gray-900">Login</h1>
                 <p>Enter your information to Login</p>
@@ -107,7 +116,7 @@ const LoginPage = () => {
                     <Button
                       id="loginButton"
                       htmlType="submit"
-                      // loading={isLoading}
+                      loading={loading}
                       className="block w-full  mx-auto  text-white rounded-lg  font-semibold"
                     >
                       Login
