@@ -18,7 +18,7 @@ type IAddToCardProps = {
 
 export default function AddToCard({ open, setOpen }: IAddToCardProps) {
   const { cart } = useAppSelector((state) => state.cart);
-
+  
   const dispatch = useAppDispatch();
 
   const handleRemoveFromCart = (serviceId: string | number) => {

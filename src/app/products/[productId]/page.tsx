@@ -14,6 +14,10 @@ import {
 import Image from "next/image";
 import { ProductsList } from "@/helpers/ProductsList";
 import { Taka } from "@/helpers/SocialIcon";
+import { useAppDispatch } from "@/redux/hook";
+import { ProductsType } from "@/types/ProductsType";
+import { addToCart } from "@/redux/features/addToCartSlice";
+import { message } from "antd";
 
 const product = {
   name: "POTATO WEDGES",
@@ -69,6 +73,14 @@ export default function SingleProduct({
     slidesToScroll: 1,
   };
 
+  // add to cart
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (addedService: ProductsType) => {
+    dispatch(addToCart(addedService));
+    message.success("Product added to cart");
+  };
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -85,7 +97,6 @@ export default function SingleProduct({
                   >
                     {({ selected }) => (
                       <>
-                    
                         <span className=" inset-0 overflow-hidden rounded-md">
                           <Image
                             src={image}
@@ -95,15 +106,12 @@ export default function SingleProduct({
                             height={500}
                           />
                         </span>
-                      
                       </>
                     )}
                   </Tab>
                 ))}
               </Slider>
             </Tab.List>
-
-
 
             <div className="aspect-h-1 aspect-w-1 w-full">
               <Image
@@ -114,7 +122,6 @@ export default function SingleProduct({
                 className="h-[400px] w-full sm:rounded-lg border  "
               />
             </div>
-            
           </Tab.Group>
 
           {/* Product info */}
@@ -142,6 +149,7 @@ export default function SingleProduct({
               <div className="sm:flex-col1 mt-10 flex">
                 <button
                   type="submit"
+                  onClick={() => handleAddToCart(productData!)}
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary/75 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                 >
                   Add to Cart
