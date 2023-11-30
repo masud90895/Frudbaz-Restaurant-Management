@@ -1,6 +1,7 @@
 "use client";
 
 import InputField from "@/components/common/InputField/InputField";
+
 import { Button, message } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = async (data: any) => {};
+
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
       <div
