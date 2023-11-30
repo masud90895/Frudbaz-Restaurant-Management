@@ -1,11 +1,12 @@
 "use client";
 
 import InputField from "@/components/common/InputField/InputField";
+import { AuthContext } from "@/firebase/AuthProvider";
 import { Button, Checkbox, message } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
@@ -16,10 +17,27 @@ const RegisterPage = () => {
     reset,
   } = useForm();
 
-  // const [registration, { isLoading }] = useRegistrationMutation();
   const router = useRouter();
 
-  const onSubmit = async (data: any) => {};
+  const handleCreateUser = async (data: any) => {
+    console.log("🚀 ~ file: page.tsx:21 ~ handleCreateUser ~ data:", data);
+  };
+
+  // google login
+
+  const { googleLogin, user, loading }: any = useContext(AuthContext);
+
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin();
+      await message.success("Login success");
+      await router.push("/");
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
+
+  console.log("🚀 ~ file: page.tsx:30 ~ RegisterPage ~ user:", user, loading);
 
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
@@ -236,23 +254,13 @@ const RegisterPage = () => {
             </svg>
           </div>
           <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleCreateUser)}>
               <div className="text-center mb-10">
                 <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
                 <p>Enter your information to register</p>
               </div>
 
               <div>
-                <InputField
-                  label="Name"
-                  name="name"
-                  placeholder="Enter your first name"
-                  register={register}
-                  errors={errors}
-                  required={true}
-                  type="text"
-                />
-
                 <InputField
                   label="Email"
                   name="email"
@@ -320,6 +328,7 @@ const RegisterPage = () => {
             </div>
             <div className="flex justify-center space-x-4">
               <button
+                onClick={handleGoogleLogin}
                 aria-label="Log in with Google"
                 className="p-3 rounded-sm border "
               >
@@ -331,7 +340,6 @@ const RegisterPage = () => {
                   <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
                 </svg>
               </button>
-             
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useEffect, useState } from "react";
 import {
   getAuth,
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  const userInfo:any = {
+  const userInfo: any = {
     user,
     createUserEmailPass,
     login,
