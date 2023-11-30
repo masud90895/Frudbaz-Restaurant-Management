@@ -7,6 +7,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { ProductsList } from "@/helpers/ProductsList";
 import Products from "@/components/Products/Products";
 import Empty from "@/components/common/Empty/Empty";
+import Pagination from "@/components/Pagination/Pagination";
 
 const filters = [
   {
@@ -253,6 +254,8 @@ export default function ProductsPage() {
             </div>
           </div>
         </main>
+        {/* Pagination */}
+        <Pagination productLength={ProductsList?.length} />
       </div>
     </div>
   );
