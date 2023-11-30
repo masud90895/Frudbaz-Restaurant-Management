@@ -19,13 +19,10 @@ const RegisterPage = () => {
 
   const router = useRouter();
 
-  const handleCreateUser = async (data: any) => {
-    console.log("🚀 ~ file: page.tsx:21 ~ handleCreateUser ~ data:", data);
-  };
-
   // google login
 
-  const { googleLogin, user, loading }: any = useContext(AuthContext);
+  const { googleLogin, createUserEmailPass, loading }: any =
+    useContext(AuthContext);
 
   const handleGoogleLogin = async () => {
     try {
@@ -37,7 +34,16 @@ const RegisterPage = () => {
     }
   };
 
-  console.log("🚀 ~ file: page.tsx:30 ~ RegisterPage ~ user:", user, loading);
+  // login with email and password
+  const handleCreateUser = async (data: any) => {
+    try {
+      await createUserEmailPass(data.email, data.password);
+      await message.success("Register success");
+      await router.push("/");
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
 
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
@@ -304,6 +310,7 @@ const RegisterPage = () => {
                 <div className="flex -mx-3 my-[16px]">
                   <div className="w-full px-3 mb-5">
                     <Button
+                      loading={loading}
                       id="loginButton"
                       htmlType="submit"
                       className={

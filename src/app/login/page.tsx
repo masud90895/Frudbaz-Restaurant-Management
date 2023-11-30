@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   // google login
 
-  const { googleLogin, user, loading }: any = useContext(AuthContext);
+  const { googleLogin }: any = useContext(AuthContext);
 
   const handleGoogleLogin = async () => {
     try {
