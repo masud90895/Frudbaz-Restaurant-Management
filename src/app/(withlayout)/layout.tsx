@@ -18,6 +18,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  // typeof window !== "undefined";
+
+ 
+
+
+
+
   return (
     <Providers>
       <html lang="en">

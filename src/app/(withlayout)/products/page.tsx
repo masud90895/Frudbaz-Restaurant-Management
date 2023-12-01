@@ -67,11 +67,10 @@ export default function ProductsPage() {
   const watchData = watch();
 
   useEffect(() => {
-    if (watchData.category) {
+    if (watchData.category && typeof window !== "undefined") {
       setCategory(watchData.category);
     }
-    if (watchData.price) {
-      setCategory("");
+    if (watchData.price && typeof window !== "undefined") {
       setPrice(Number(watchData.price));
     }
   }, [watchData.category, watchData.price]);
@@ -243,8 +242,7 @@ export default function ProductsPage() {
                               className="flex items-center"
                             >
                               <input
-                                id={category.value}
-                                name={section.id}
+                                id={category.value.toString()}
                                 {...register(section.id)}
                                 type="radio"
                                 value={category.value}

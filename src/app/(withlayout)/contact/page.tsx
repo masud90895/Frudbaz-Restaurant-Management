@@ -21,7 +21,7 @@ const Contact = () => {
     try {
       await sendEmail(data).unwrap();
       await message.success("Message sent successfully");
-      await reset();
+      reset();
     } catch (error) {
       console.log(error);
       message.error("Something went wrong");
