@@ -2,7 +2,6 @@ import { ProductsType } from "@/types/ProductsType";
 import Image from "next/image";
 import React, { useContext } from "react";
 import { Taka } from "@/helpers/SocialIcon";
-import NoProduct from "../../../public/images/noProduct.png";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import { addToCart } from "@/redux/features/addToCartSlice";
@@ -38,7 +37,7 @@ const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
           />
         ) : (
           <Image
-            src={NoProduct}
+            src={"https://i.ibb.co/BgGFYTL/noproduct.png"}
             alt="hero"
             width={500}
             height={500}

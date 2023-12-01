@@ -8,7 +8,6 @@ import { Empty, message } from "antd";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { removeFromCart } from "@/redux/features/addToCartSlice";
 import { ProductsType } from "@/types/ProductsType";
-import NoProducts from "../../../public/images/noProduct.png";
 import { Taka } from "@/helpers/SocialIcon";
 
 type IAddToCardProps = {
@@ -89,7 +88,10 @@ export default function AddToCard({ open, setOpen }: IAddToCardProps) {
                                 <li key={service?.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
-                                      src={service?.cover ?? NoProducts}
+                                      src={
+                                        service?.cover ??
+                                        "https://i.ibb.co/BgGFYTL/noproduct.png"
+                                      }
                                       alt={service?.title}
                                       className="h-full w-full object-cover object-center"
                                     />

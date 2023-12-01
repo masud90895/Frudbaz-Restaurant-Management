@@ -1,7 +1,6 @@
 "use client";
 
 import { Disclosure, Tab } from "@headlessui/react";
-import NoProduct from "../../../../../public/images/noproduct.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -127,7 +126,7 @@ export default function SingleProduct({
 
             <div className="aspect-h-1 aspect-w-1 w-full">
               <Image
-                src={product?.cover ?? NoProduct}
+                src={product?.cover ?? "https://i.ibb.co/BgGFYTL/noproduct.png"}
                 alt={product?.title ?? "No Product"}
                 width={500}
                 height={500}

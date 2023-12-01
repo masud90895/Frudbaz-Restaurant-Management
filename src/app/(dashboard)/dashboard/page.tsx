@@ -15,7 +15,7 @@ import { removeFromCart } from "@/redux/features/addToCartSlice";
 
 import { useForm } from "react-hook-form";
 import InputField from "@/components/common/InputField/InputField";
-import NoImage from "../../../../public/images/noproduct.png";
+import NoImage from "@/public/images/noproduct.png";
 import { ProductsType } from "@/types/ProductsType";
 import { Taka } from "@/helpers/SocialIcon";
 
