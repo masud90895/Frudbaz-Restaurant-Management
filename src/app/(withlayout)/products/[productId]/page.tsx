@@ -12,16 +12,16 @@ import {
   MinusCircleOutlined,
 } from "@ant-design/icons";
 import Image from "next/image";
-import { ProductsList } from "@/helpers/ProductsList";
 import { Taka } from "@/helpers/SocialIcon";
 import { useAppDispatch } from "@/redux/hook";
 import { ProductsType } from "@/types/ProductsType";
 import { addToCart } from "@/redux/features/addToCartSlice";
-import { message } from "antd";
+import { Spin, message } from "antd";
 import { AuthContext } from "@/firebase/AuthProvider";
 import { useContext } from "react";
+import { useSingleProductQuery } from "@/redux/features/products";
 
-const product = {
+const singleProduct = {
   name: "POTATO WEDGES",
   price: "$140",
   rating: 4,
@@ -62,9 +62,7 @@ export default function SingleProduct({
 }: {
   params: { productId: string };
 }) {
-  const productData = ProductsList.find(
-    (pr) => pr.id.toString() === params.productId.toString()
-  );
+  const { data: product, isLoading } = useSingleProductQuery(params.productId);
 
   // console.log(productData);
   const settings = {
@@ -87,6 +85,14 @@ export default function SingleProduct({
     message.success("Product added to cart");
   };
 
+  if (isLoading) {
+    return (
+      <Spin tip="Loading" size="large">
+        <div className="content" />
+      </Spin>
+    );
+  }
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -95,11 +101,11 @@ export default function SingleProduct({
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
             <Tab.List className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
-              <Slider {...settings} className="grid grid-cols-4 gap-6">
-                {productData?.images?.map((image, i) => (
+              <Slider {...settings} className="grid grid-cols-4 gap-6 ">
+                {product?.images?.map((image: any, i: number) => (
                   <Tab
                     key={i}
-                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50  "
+                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 "
                   >
                     {({ selected }) => (
                       <>
@@ -121,8 +127,8 @@ export default function SingleProduct({
 
             <div className="aspect-h-1 aspect-w-1 w-full">
               <Image
-                src={productData?.cover ?? NoProduct}
-                alt={productData?.title ?? "No Product"}
+                src={product?.cover ?? NoProduct}
+                alt={product?.title ?? "No Product"}
                 width={500}
                 height={500}
                 className="h-[400px] w-full sm:rounded-lg border  "
@@ -133,13 +139,13 @@ export default function SingleProduct({
           {/* Product info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {productData?.title}
+              {product?.title}
             </h1>
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {Taka} {productData?.price}
+                {Taka} {product?.price}
               </p>
             </div>
 
@@ -147,7 +153,7 @@ export default function SingleProduct({
               <h3 className="sr-only">Description</h3>
 
               <p className="space-y-6 text-base text-gray-700">
-                {productData?.description}
+                {product?.description}
               </p>
             </div>
 
@@ -155,7 +161,7 @@ export default function SingleProduct({
               <div className="sm:flex-col1 mt-10 flex">
                 <button
                   type="submit"
-                  onClick={() => handleAddToCart(productData!)}
+                  onClick={() => handleAddToCart(product)}
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary/75 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                 >
                   Add to Cart
@@ -180,7 +186,7 @@ export default function SingleProduct({
               </h2>
 
               <div className="divide-y divide-gray-200 border-t">
-                {product.details.map((detail) => (
+                {singleProduct.details.map((detail: any) => (
                   <Disclosure as="div" key={detail.name}>
                     {({ open }) => (
                       <>
@@ -214,7 +220,7 @@ export default function SingleProduct({
                           className="prose prose-sm pb-6"
                         >
                           <ul role="list" className="list-disc">
-                            {detail.items.map((item, i) => (
+                            {detail.items.map((item: any, i: number) => (
                               <li key={item}>
                                 <span>{i + 1}.</span> {item}
                               </li>

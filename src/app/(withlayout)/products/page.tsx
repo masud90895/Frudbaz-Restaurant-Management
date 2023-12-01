@@ -65,13 +65,13 @@ export default function ProductsPage() {
   const onSubmit = (data: any) => console.log(data);
 
   const watchData = watch();
-  
-  
+
   useEffect(() => {
     if (watchData.category) {
       setCategory(watchData.category);
     }
     if (watchData.price) {
+      setCategory("");
       setPrice(Number(watchData.price));
     }
   }, [watchData.category, watchData.price]);
@@ -295,7 +295,11 @@ export default function ProductsPage() {
           </div>
         </main>
         {/* Pagination */}
-        <Pagination productLength={ProductsList?.length} setPage={setPage} page={page} />
+        <Pagination
+          productLength={ProductsList?.length}
+          setPage={setPage}
+          page={page}
+        />
       </div>
     </div>
   );

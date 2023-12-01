@@ -10,17 +10,29 @@ const productApi = api.injectEndpoints({
     }),
     getAllProducts: builder.query({
       query: ({
-        category = "",
-        price ,
+        category,
+        price,
         page = 1,
       }: {
         category?: string;
         price?: number;
         page?: number;
-      }) =>
-        `/products?limit=8&page=${page}&category=${category ?? null}&price=${price?? null}`,
+      }) => {
+        let url = `/products?limit=8&page=${page}`;
+        if (category) {
+          url += `&category=${category}`;
+        }
+        if (price) {
+          url += `&price=${price}`;
+        }
+        return url;
+      },
     }),
   }),
 });
 
-export const { useGetProductsQuery, useSingleProductQuery,useGetAllProductsQuery } = productApi;
+export const {
+  useGetProductsQuery,
+  useSingleProductQuery,
+  useGetAllProductsQuery,
+} = productApi;
