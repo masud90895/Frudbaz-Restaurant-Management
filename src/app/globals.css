@@ -17,6 +17,16 @@ body {
   color: #1e1d23;
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+
 .common {
   @apply px-[10px] 2xl:px-[350px] xl:px-[100px] lg:px-[80px] md:px-[50px];
 }
@@ -577,27 +587,19 @@ footer img {
   color: crimson;
 }
 
-#loginButton{
+#loginButton {
   background-color: #ff8e28;
   color: #fff;
-  border : 1px solid #ff8e28!;
+  border: 1px solid #ff8e28!;
 }
-#loginButton:hover{
+#loginButton:hover {
   background-color: #fff;
   color: #ff8e28;
-  border : 1px solid #ff8e28 !important;
-
-
+  border: 1px solid #ff8e28 !important;
 }
-
-
-
 
 @media screen and (max-width: 800px) {
   .dishes button {
     margin-bottom: 20px;
   }
 }
-
-
-

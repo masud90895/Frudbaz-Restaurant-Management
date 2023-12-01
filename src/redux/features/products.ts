@@ -28,6 +28,13 @@ const productApi = api.injectEndpoints({
         return url;
       },
     }),
+
+    // searchProductByTitle
+    searchProductByTitle: builder.query({
+      query: (title) => `/products?title=${title}`,
+    })
+
+
   }),
 });
 
@@ -35,4 +42,5 @@ export const {
   useGetProductsQuery,
   useSingleProductQuery,
   useGetAllProductsQuery,
+  useSearchProductByTitleQuery
 } = productApi;
