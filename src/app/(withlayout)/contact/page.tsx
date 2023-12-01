@@ -3,18 +3,30 @@ import React from "react";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/common/InputField/InputField";
+import { useSendEmailMutation } from "@/redux/features/sendEmail";
+import { Button, message } from "antd";
 
 const Contact = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
+  const [sendEmail, { isLoading }] = useSendEmailMutation();
 
-  console.log(watch("example"));
+  const onSubmit = async (data: any) => {
+    try {
+      await sendEmail(data).unwrap();
+      await message.success("Message sent successfully");
+      await reset();
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong");
+    }
+  };
 
   return (
     <div className="relative isolate bg-white">
@@ -116,20 +128,15 @@ const Contact = () => {
           className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
         >
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-         
-             
-
-              <InputField
-                errors={errors}
-                register={register}
-                label="Name"
-                name="name"
-                placeholder="Name"
-                required
-                type="text"
-              />
-
-             
+            <InputField
+              errors={errors}
+              register={register}
+              label="Name"
+              name="name"
+              placeholder="Name"
+              required
+              type="text"
+            />
 
             {/* email */}
             <InputField
@@ -141,8 +148,6 @@ const Contact = () => {
               required
               type="email"
             />
-            
-
 
             {/* subject */}
 
@@ -155,11 +160,6 @@ const Contact = () => {
               required
               type="text"
             />
-
-            
-
-
-
 
             <div className="sm:col-span-2">
               <label
@@ -183,12 +183,13 @@ const Contact = () => {
             )}
           </div>
           <div className="mt-8 flex justify-end">
-            <button
-              type="submit"
-              className="rounded-md bg-primary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/70"
+            <Button
+              htmlType="submit"
+              loading={isLoading}
+              className="rounded-md bg-primary px-3.5  text-center text-sm font-semibold text-white shadow-sm hover:bg-primary/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/70"
             >
               Send message
-            </button>
+            </Button>
           </div>
         </form>
       </div>
