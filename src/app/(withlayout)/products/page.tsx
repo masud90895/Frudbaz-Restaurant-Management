@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { CloseOutlined } from "@ant-design/icons";
 import { DownOutlined } from "@ant-design/icons";
@@ -9,6 +9,9 @@ import Products from "@/components/Products/Products";
 import Empty from "@/components/common/Empty/Empty";
 import Pagination from "@/components/Pagination/Pagination";
 import { useForm } from "react-hook-form";
+import { useGetAllProductsQuery } from "@/redux/features/products";
+import { Spin } from "antd";
+import { ProductsType } from "@/types/ProductsType";
 
 const filters = [
   {
@@ -27,12 +30,12 @@ const filters = [
     id: "price",
     name: "Price Range",
     options: [
-      { value: "0-99", label: "৳0-৳99" },
-      { value: "100-199", label: "৳100-৳199" },
-      { value: "200-299", label: "৳200-৳299" },
-      { value: "300-399", label: "৳300-৳399" },
-      { value: "400-499", label: "৳400-৳499" },
-      { value: "500+", label: "৳500+" },
+      { value: 99, label: "৳99" },
+      { value: 199, label: "৳199" },
+      { value: 299, label: "৳299" },
+      { value: 399, label: "৳399" },
+      { value: 499, label: "৳499" },
+      { value: 500, label: "৳500+" },
     ],
   },
 
@@ -53,17 +56,31 @@ function classNames(...classes: any) {
 
 export default function ProductsPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState<any>();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const onSubmit = (data: any) => console.log(data);
 
-  console.log(watch());
+  const watchData = watch();
+  
+  
+  useEffect(() => {
+    if (watchData.category) {
+      setCategory(watchData.category);
+    }
+    if (watchData.price) {
+      setPrice(Number(watchData.price));
+    }
+  }, [watchData.category, watchData.price]);
+
+  const { data, isLoading } = useGetAllProductsQuery({
+    category,
+    price,
+    page,
+  });
 
   return (
     <div className="bg-white">
@@ -253,8 +270,12 @@ export default function ProductsPage() {
             <div className=" mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3 grid gap-5">
               {/* Products */}
 
-              {ProductsList?.length > 0 ? (
-                ProductsList.map((product, index) => (
+              {isLoading ? (
+                <Spin tip="Loading" size="large">
+                  <div className="content" />
+                </Spin>
+              ) : data?.length > 0 ? (
+                data.map((product: ProductsType) => (
                   <Products
                     key={product.id}
                     category={product.category}
@@ -274,7 +295,7 @@ export default function ProductsPage() {
           </div>
         </main>
         {/* Pagination */}
-        <Pagination productLength={ProductsList?.length} />
+        <Pagination productLength={ProductsList?.length} setPage={setPage} page={page} />
       </div>
     </div>
   );

@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import Heading from "../common/Heading";
-// import { ProductsList } from "@/helpers/ProductsList";
-import { ProductsType } from "@/types/ProductsType";
 
 import Products from "../Products/Products";
 import { useGetProductsQuery } from "@/redux/features/products";
@@ -52,10 +50,6 @@ const CategoryWithProduct = () => {
 
   const { data: products, isLoading } = useGetProductsQuery(category);
 
-  console.log(
-    "🚀 ~ file: CategoryWithProduct.tsx:58 ~ CategoryWithProduct ~ products:",
-    products
-  );
 
   const handleFilter = (category: string) => {
     if (category === "ALL") {
@@ -66,18 +60,7 @@ const CategoryWithProduct = () => {
     setCategory(category);
   };
 
-  // ?limit=10&page=${page}&title=${title}&category=${category}&price=${price}
-  // {
-  //       page = 1,
-  //       title,
-  //       category,
-  //       price,
-  //     }: {
-  //       page?: number;
-  //       title?: string;
-  //       category?: string;
-  //       price?: string;
-  //     }
+ 
 
   if (isLoading) {
     return (
@@ -87,18 +70,6 @@ const CategoryWithProduct = () => {
     );
   }
 
-  // const filterItems = (category: string) => {
-  //   const newItems = ProductsList.filter(
-  //     (item: ProductsType) => item.category === category
-  //   );
-  //   setMenuItem(newItems);
-
-  //   // for all data show
-  //   if (category === "all") {
-  //     setMenuItem(ProductsList);
-  //     return;
-  //   }
-  // };
   return (
     <>
       <section className="dishes">

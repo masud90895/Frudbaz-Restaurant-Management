@@ -23,7 +23,7 @@ const Products = ({ cover, sub, category, title, price, id }: ProductsType) => {
   };
 
   return (
-    <div className="dishes bg-gray-100 border-gray-200 rounded-lg hover:scale-105 transition-all    ">
+    <div className="dishes bg-gray-100 border-gray-200 rounded-lg hover:scale-105 transition-all  h-[530px]  ">
       <div className="img">
         {cover ? (
           <Image
