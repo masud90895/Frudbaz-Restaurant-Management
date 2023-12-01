@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frudbaz Restaurant Management
 
-## Getting Started
+## Live Link
 
-First, run the development server:
+Hosted in Vercel -> [Frudbaz-Restaurant-Management](https://frudbaz.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Github Link (client)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-> [Client](https://github.com/masud90895/Frudbaz-Restaurant-Management)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📌 About 
 
-## Learn More
+Frudbaz is a restaurant management system.Here user can order food and see their order list.Here User can also contact with the admin and give feedback.
 
-To learn more about Next.js, take a look at the following resources:
+## 📌 Features
+ <!-- Bollet Point -->
+* User can order food.
+* User can see their order list.
+* User can contact with admin.
+* User can give feedback.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📌 Technology Used
+* Next.js
+* TypeScript
+* Redux
+* Tailwind CSS
+* Firebase Authentication
+* Ant Design
+* Node Mailer
+* slick-carousel
+* React Context API
+* React Hook Form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 🔗 Social Links
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[![facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/masud90895)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/masud90895/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/masud90895)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Thanks for reading this
