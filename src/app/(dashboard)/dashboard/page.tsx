@@ -15,7 +15,6 @@ import { removeFromCart } from "@/redux/features/addToCartSlice";
 
 import { useForm } from "react-hook-form";
 import InputField from "@/components/common/InputField/InputField";
-import NoImage from "@/public/images/noproduct.png";
 import { ProductsType } from "@/types/ProductsType";
 import { Taka } from "@/helpers/SocialIcon";
 
@@ -362,7 +361,10 @@ export default function Checkout() {
                       <li key={service?.id} className="flex px-4 py-6 sm:px-6">
                         <div className="flex-shrink-0">
                           <Image
-                            src={service?.cover ?? NoImage}
+                            src={
+                              service?.cover ??
+                              "https://i.ibb.co/BgGFYTL/noproduct.png"
+                            }
                             alt={service?.title}
                             className="w-20 rounded-md"
                             height={80}
