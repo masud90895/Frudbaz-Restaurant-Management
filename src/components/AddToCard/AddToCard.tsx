@@ -18,7 +18,7 @@ type IAddToCardProps = {
 
 export default function AddToCard({ open, setOpen }: IAddToCardProps) {
   const { cart } = useAppSelector((state) => state.cart);
-  
+
   const dispatch = useAppDispatch();
 
   const handleRemoveFromCart = (serviceId: string | number) => {
@@ -149,7 +149,7 @@ export default function AddToCard({ open, setOpen }: IAddToCardProps) {
                       </p>
                       <div className="mt-6">
                         <Link
-                          href="/checkout"
+                          href="/dashboard"
                           className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"
                         >
                           Checkout
