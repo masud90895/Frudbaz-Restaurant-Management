@@ -2,26 +2,103 @@
 
 import React, { useState } from "react";
 import Heading from "../common/Heading";
-import { ProductsList } from "@/helpers/ProductsList";
+// import { ProductsList } from "@/helpers/ProductsList";
 import { ProductsType } from "@/types/ProductsType";
 
 import Products from "../Products/Products";
+import { useGetProductsQuery } from "@/redux/features/products";
+import { Spin } from "antd";
+
+const Category = [
+  {
+    id: 1,
+    category: "ALL",
+    title: "ALL",
+  },
+  {
+    id: 2,
+    category: "BURGER",
+    title: "BURGER",
+  },
+  {
+    id: 3,
+    category: "PIZZA",
+    title: "PIZZA",
+  },
+  {
+    id: 4,
+    category: "BLUEBERRY_SHAKE",
+    title: "BLUEBERRY SHAKE",
+  },
+  {
+    id: 5,
+    category: "CHICKEN_CHUP",
+    title: "CHICKEN CHUP",
+  },
+  {
+    id: 6,
+    category: "ICE_CREAM",
+    title: "ICE CREAM",
+  },
+  {
+    id: 7,
+    category: "DRINK",
+    title: "DRINK",
+  },
+];
 
 const CategoryWithProduct = () => {
-  const [menuItems, setMenuItem] = useState(ProductsList);
+  const [category, setCategory] = useState("");
 
-  const filterItems = (category: string) => {
-    const newItems = ProductsList.filter(
-      (item: ProductsType) => item.category === category
-    );
-    setMenuItem(newItems);
+  const { data: products, isLoading } = useGetProductsQuery(category);
 
-    // for all data show
-    if (category === "all") {
-      setMenuItem(ProductsList);
+  console.log(
+    "🚀 ~ file: CategoryWithProduct.tsx:58 ~ CategoryWithProduct ~ products:",
+    products
+  );
+
+  const handleFilter = (category: string) => {
+    if (category === "ALL") {
+      setCategory("");
       return;
     }
+
+    setCategory(category);
   };
+
+  // ?limit=10&page=${page}&title=${title}&category=${category}&price=${price}
+  // {
+  //       page = 1,
+  //       title,
+  //       category,
+  //       price,
+  //     }: {
+  //       page?: number;
+  //       title?: string;
+  //       category?: string;
+  //       price?: string;
+  //     }
+
+  if (isLoading) {
+    return (
+      <Spin tip="Loading" size="large">
+        <div className="content" />
+      </Spin>
+    );
+  }
+
+  // const filterItems = (category: string) => {
+  //   const newItems = ProductsList.filter(
+  //     (item: ProductsType) => item.category === category
+  //   );
+  //   setMenuItem(newItems);
+
+  //   // for all data show
+  //   if (category === "all") {
+  //     setMenuItem(ProductsList);
+  //     return;
+  //   }
+  // };
   return (
     <>
       <section className="dishes">
@@ -29,41 +106,35 @@ const CategoryWithProduct = () => {
           <Heading subtitle="Popular Products" title="POPULAR PRODUCTS" />
 
           <div className="button">
-            <button onClick={() => filterItems("all")} className="btn1">
-              all
-            </button>
-            <button onClick={() => filterItems("BURGER")} className="btn1">
-              BURGER
-            </button>
-            <button onClick={() => filterItems("PIZZA")} className="btn1">
-              PIZZA
-            </button>
-            <button onClick={() => filterItems("BURGER")} className="btn1">
-              BLUEBERRY SHAKE
-            </button>
-            <button onClick={() => filterItems("PIZZA")} className="btn1">
-              CHICKEN CHUP
-            </button>
-            <button onClick={() => filterItems("BURGER")} className="btn1">
-              ICE CREAM
-            </button>
-            <button onClick={() => filterItems("DRINK")} className="btn1">
-              DRINK
-            </button>
+            {Category.map((items, index) => (
+              <button
+                onClick={() => handleFilter(items.category)}
+                key={index}
+                className="btn1"
+              >
+                {items.title}
+              </button>
+            ))}
           </div>
 
           <div className="content grid grid-cols-1 gap-4  ">
-            {menuItems.map((items, index) => (
-              <Products
-                key={index}
-                category={items.category}
-                title={items.title}
-                price={items.price}
-                cover={items.cover}
-                sub={items.sub}
-                id={items.id}
-              />
-            ))}
+            {isLoading ? (
+              <Spin tip="Loading" size="large">
+                <div className="content" />
+              </Spin>
+            ) : (
+              products?.map((items: any, index: number) => (
+                <Products
+                  key={index}
+                  category={items.category}
+                  title={items.title}
+                  price={items.price}
+                  cover={items.cover}
+                  sub={items.sub}
+                  id={items.id}
+                />
+              ))
+            )}
           </div>
         </div>
       </section>

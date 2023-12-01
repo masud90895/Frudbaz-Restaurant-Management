@@ -3,18 +3,8 @@ import { api } from "../api/apiSlice";
 const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({
-        page,
-        title,
-        category,
-        price,
-      }: {
-        page: number;
-        title: string;
-        category: string;
-        price: string;
-      }) =>
-        `/products?limit=10&page=${page}&title=${title}&category=${category}&price=${price}`,
+      query: (category) =>
+        `/products?limit=10&page=1&category=${category}`,
     }),
     singleProduct: builder.query({
       query: (id) => `/products/${id}`,
